@@ -41,25 +41,25 @@
         };
 
         function iniciaMapa(){
-            map = new google.maps.Map(document.getElementById("map"), propiedades);
+            map = new google.maps.Map(document.getElementById("map"),propiedades);
 
             var icono = {
                 url: "https://giphy.com/media/10RgZyfaX0HBSg/giphy.gif%22",
-                scaledSize: new google.maps.Size(500,500),
+                scaledSize: new google.maps.Size(50,50),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(0,0)
             }
 
             var marker = new google.maps.Marker({
                 position: coordenadas,
-                icon: icono
+                icon: icono,
+                map: map
             });
 
             if(navigator.geolocation){
 
                 setInterval( () => {
                     moverPosicion(marker);
-                    console.log("Mueve posición");
                 }, 5000);
             
             }
