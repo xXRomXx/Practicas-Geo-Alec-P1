@@ -12,6 +12,7 @@
     </div>
 
     <script>
+        
         var paises = document.getElementById("paises");
         fetch('datos.json')
         .then( function(response){
@@ -21,7 +22,7 @@
                     console.log(registro.country);
                     let nombre = document.createElement("p");
                     nombre.textContent = "Pais: " + registro.country + ", casos: " + registro.cases;
-                    paises.append
+                    paises.appendChild(nombre);
                 });
 
            });
