@@ -32,11 +32,36 @@
                     //console.log(datos);
                     const map = new google.maps.Map(document.getElementById('map'), propiedades);
 
-                    datos.array.forEach(marcador => {
+                    datos.forEach(marcador => {
                         
                         fetch('https://corona.lmao.ninja/countries')
                         .then(function(respuesta){
-                            console.log(respuesta);
+                            respuesta.json().then(function(datospaises){
+                                console.log(datospaises);
+
+                                datospaises.forEach(registro => {
+
+                                    var informacion = "<strong>País: </strong>" + registro.country + "<strong>, casos: </strong>" + registro.cases;
+                                    var infowindow = new google.maps.InfoWindow({
+                                        content: informacion
+                                    });
+
+                                    if(registro.country == marcador.CountryName){
+
+                                        let marker = new google.maps.Marker({
+                                            map: map,
+                                            position: new google.maps.LatLng(marcador.CapitalLatitude, marcador.CapitalLongitude),
+                                            title: marcador.CountryName + ' ' + registro.cases
+                                        });
+
+                                        marker.addListener('click', function(){
+                                            infowindow.open(map.marker);
+                                        });
+
+                                    }
+
+                                });
+                            });
                         });
                     });
                 });
